@@ -17,21 +17,12 @@ public class PlayerController : Controller {
 	
 	// Update is called once per frame
 	void Update () {
-        playerState = States.Idle;
         moveX = Input.GetAxis("Horizontal") * speed;
-        isGrounded = pawn.IsGrounded();
-
-        if (moveX > 0 || moveX < 0) {
-            playerState = States.Walk;
-        }
+        SetState();
 
 
-        if (isGrounded && !Input.GetKeyDown(KeyCode.Space)) {
+        if (pawn.IsGrounded() && !Input.GetKeyDown(KeyCode.Space)) {
             jumpCount = jumpMax;
-        }
-
-        if (!isGrounded) {
-            playerState = States.Jump;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0) {
@@ -44,4 +35,22 @@ public class PlayerController : Controller {
         
         pawn.SideMovement(moveX);
 	}
+
+    void SetState() {
+        if (moveX == 0) {
+            playerState = States.Idle;
+        } else if (moveX > 0 || moveX < 0) {
+            playerState = States.Walk;
+        }
+
+        if (!pawn.IsGrounded()) {
+            playerState = States.Jump;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "CheckPoints") {
+            GameManager.instance.checkPoint = collision.gameObject;
+        }
+    }
 }
