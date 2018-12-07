@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;             // Create Singleton
 
+    [HideInInspector]
+    public string playerState;
+
     void Awake() {
         if (instance != null) {     // If the is an Game Manager instance
             Destroy(gameObject);    // Destory new one
@@ -22,6 +25,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }

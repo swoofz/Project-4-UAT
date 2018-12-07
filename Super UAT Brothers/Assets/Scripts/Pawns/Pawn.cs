@@ -37,7 +37,7 @@ public class Pawn : MonoBehaviour {
     }
 
     public virtual bool IsGrounded() {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.6f); // See if anything is below us
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.3f); // See if anything is below us
 
         if (hit.collider != null) {             // if we hit anything
             string name = hit.collider.name;    // create a variable for what we hit to make it easy to use
@@ -49,4 +49,12 @@ public class Pawn : MonoBehaviour {
         return false;   // return false
     }
 
+    public virtual string ChangeState(Controller.States state) {
+        return state.ToString();
+    }
+
+    public virtual void ChangeAnimation(string state) {
+        Animator anim = GetComponent<Animator>();
+        anim.Play(state);
+    }
 }
