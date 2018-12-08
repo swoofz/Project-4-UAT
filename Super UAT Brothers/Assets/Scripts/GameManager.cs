@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance;             // Create Singleton
 
-    [HideInInspector]
-    public string playerState;
-    [HideInInspector]
-    public GameObject checkPoint;
-
+    [HideInInspector] public string playerState;
+    [HideInInspector] public GameObject checkPoint;
+    [HideInInspector] public bool gameIsRunning;
 
     private GameObject player;
     private Vector3 startLocation;
@@ -26,16 +25,29 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player = FindObjectOfType<PlayerController>().gameObject;
-        startLocation = player.transform.position;
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            RespawnAtCheckPoint();
+        if (player == null && gameIsRunning) {
+            FindPlayer();
         }
-	}
+
+        if (gameIsRunning) {
+            if (Input.GetKeyDown(KeyCode.Q) && player != null) {
+                RespawnAtCheckPoint();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E)) {
+                SceneManager.LoadScene("Level_02");
+            }
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+                SceneManager.LoadScene("Level_01");
+            }
+        }
+    }
 
 
     void RespawnAtCheckPoint() {
@@ -43,6 +55,14 @@ public class GameManager : MonoBehaviour {
             player.transform.position = checkPoint.transform.position + Vector3.up;
         } else {
             player.transform.position = startLocation;
+        }
+    }
+
+
+    void FindPlayer() {
+        if (FindObjectOfType<PlayerController>() != null) {
+            player = FindObjectOfType<PlayerController>().gameObject;
+            startLocation = player.transform.position;
         }
     }
 }
