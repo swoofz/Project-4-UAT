@@ -16,8 +16,9 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public int startLives;
     [HideInInspector] public string playerState;
     [HideInInspector] public GameObject checkPoint;
-    [HideInInspector] public bool gameIsRunning, gameOver;
+    [HideInInspector] public bool gameIsRunning;
     [HideInInspector] public bool playerDied;
+    [HideInInspector] public bool goThroughDoor, lastLevel;
     [HideInInspector] public bool win, lose;
     [HideInInspector] public int coinCount, keyCount;
 
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         gameIsRunning = CheckScene();
 
-        if (gameIsRunning && !gameOver) {    // if the game is running
+        if (gameIsRunning) {    // if the game is running
 
             if (player == null) {
                 FindPlayer();
@@ -53,27 +54,22 @@ public class GameManager : MonoBehaviour {
                     playerLives -= 1;
                     RespawnAtCheckPoint();
                 } else {
-                    gameOver = true;
+                    lose = true;
                 }
 
                 playerDied = false;
             }
 
+            if (goThroughDoor) {
+                if (!lastLevel) {
+                    ResetCounts();
+                    SceneManager.LoadScene("Level_02");
+                } else {
+                    win = true;
+                }
 
-
-
-            if (Input.GetKeyDown(KeyCode.E)) {
-                SceneManager.LoadScene("Level_02");
+                goThroughDoor = false;
             }
-
-            if (Input.GetKeyDown(KeyCode.R)) {
-                SceneManager.LoadScene("Level_01");
-            }
-        }
-
-        if (gameOver) {
-            lose = true;
-            gameOver = false;
         }
     }
 
@@ -101,5 +97,12 @@ public class GameManager : MonoBehaviour {
             player = FindObjectOfType<PlayerController>().gameObject;
             startLocation = player.transform.position;
         }
+    }
+
+    void ResetCounts() {
+        coinCount = 0;
+        keyCount = 0;
+        coins = new List<PickUp>();
+        keys = new List<PickUp>();
     }
 }

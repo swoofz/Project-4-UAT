@@ -18,15 +18,7 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    void Start() {
-        
-    }
-
-
     public void LoadLevel(string level) {
-        GameManager.instance.coinCount = 0;
-        GameManager.instance.keyCount = 0;
         SceneManager.LoadScene(level);
         CheckLevel(level);
     }
@@ -43,5 +35,9 @@ public class LevelManager : MonoBehaviour {
 
     void ResetGame() {
         GameManager.instance.playerLives = GameManager.instance.startLives;
+        GameManager.instance.coinCount = 0;
+        GameManager.instance.keyCount = 0;
+        GameManager.instance.keys = new List<PickUp>();
+        GameManager.instance.coins = new List<PickUp>();
     }
 }

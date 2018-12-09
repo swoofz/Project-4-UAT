@@ -19,11 +19,9 @@ public class PickUp : MonoBehaviour {
     void PickUpItem(string item) {
         if (item == "Coin") {
             GameManager.instance.coinCount += 1;
-            Debug.Log("Got Coin");
         }
         if (item == "Key") {
             GameManager.instance.keyCount += 1;
-            Debug.Log("Got Key");
         }
     }
 

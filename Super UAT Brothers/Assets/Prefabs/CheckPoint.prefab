@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4666553154686456}
   - component: {fileID: 212067482955084188}
   - component: {fileID: 61761719868310940}
+  - component: {fileID: 95752549456415830}
   - component: {fileID: 114534711608284784}
   m_Layer: 0
   m_Name: CheckPoint
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580845396772532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.78, y: 3.5, z: 0}
+  m_LocalPosition: {x: 13.78, y: 3.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,6 +68,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32144928, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &95752549456415830
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580845396772532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a00c47c17bd8214b8957e1ba4e90780, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114534711608284784
 MonoBehaviour:
   m_ObjectHideFlags: 1
