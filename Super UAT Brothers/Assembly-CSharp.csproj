@@ -61,12 +61,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ButtonActions.cs" />
+    <Compile Include="Assets\Scripts\ActiveScreen.cs" />
     <Compile Include="Assets\Scripts\CheckPoints.cs" />
     <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
+    <Compile Include="Assets\Scripts\Controllers\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\ItemText.cs" />
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Pause.cs" />
     <Compile Include="Assets\Scripts\Pawns\Pawn.cs" />
+    <Compile Include="Assets\Scripts\Pawns\Snail.cs" />
+    <Compile Include="Assets\Scripts\PickUp.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/Users/Administrator/Documents/UAT/Unity Projects/GPE104/week4/Project 4/Super UAT Brothers/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

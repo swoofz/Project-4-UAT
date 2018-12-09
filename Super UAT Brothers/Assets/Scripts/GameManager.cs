@@ -1,21 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance;             // Create Singleton
 
+    public int playerLives;
+
+
+    [HideInInspector] public List<PickUp> coins;
+    [HideInInspector] public List<PickUp> keys;
+    [HideInInspector] public int startLives;
     [HideInInspector] public string playerState;
     [HideInInspector] public GameObject checkPoint;
-    [HideInInspector] public bool gameIsRunning;
+    [HideInInspector] public bool gameIsRunning, gameOver;
+    [HideInInspector] public bool playerDied;
+    [HideInInspector] public bool win, lose;
+    [HideInInspector] public int coinCount, keyCount;
 
     private GameObject player;
     private Vector3 startLocation;
 
     void Awake() {
-        if (instance != null) {     // If the is an Game Manager instance
+        if (instance != null) {     // If there is an Game Manager instance
             Destroy(gameObject);    // Destory new one
         } else {                            // Otherwise
             instance = this;                // Set instance to this Game Manager
@@ -25,19 +35,32 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        startLives = playerLives;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (player == null && gameIsRunning) {
-            FindPlayer();
-        }
+        gameIsRunning = CheckScene();
 
-        if (gameIsRunning) {
-            if (Input.GetKeyDown(KeyCode.Q) && player != null) {
-                RespawnAtCheckPoint();
+        if (gameIsRunning && !gameOver) {    // if the game is running
+
+            if (player == null) {
+                FindPlayer();
             }
+
+            if (playerDied) {
+                if (playerLives > 0) {
+                    playerLives -= 1;
+                    RespawnAtCheckPoint();
+                } else {
+                    gameOver = true;
+                }
+
+                playerDied = false;
+            }
+
+
+
 
             if (Input.GetKeyDown(KeyCode.E)) {
                 SceneManager.LoadScene("Level_02");
@@ -47,8 +70,22 @@ public class GameManager : MonoBehaviour {
                 SceneManager.LoadScene("Level_01");
             }
         }
+
+        if (gameOver) {
+            lose = true;
+            gameOver = false;
+        }
     }
 
+    bool CheckScene() {
+        for (int i = 0; i < SceneManager.sceneCount; i++) {
+            if (SceneManager.GetActiveScene().name == "Start") {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     void RespawnAtCheckPoint() {
         if (checkPoint != null) {

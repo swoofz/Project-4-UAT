@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4903035031923702}
   - component: {fileID: 114317672750866794}
+  - component: {fileID: 114346034511167596}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -51,6 +52,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8b586335348474a9ae981238bf54fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLives: 3
+  coins: []
+  keys: []
+  startLives: 0
   playerState: 
   checkPoint: {fileID: 0}
   gameIsRunning: 0
+  gameOver: 0
+  playerDied: 0
+  win: 0
+  lose: 0
+--- !u!114 &114346034511167596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094340148926526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e700dce897228a49bea5ea6450d04cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

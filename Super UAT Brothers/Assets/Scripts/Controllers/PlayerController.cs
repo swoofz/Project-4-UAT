@@ -30,10 +30,22 @@ public class PlayerController : Controller {
             jumpCount -= 1;
         }
 
+        if (!pawn.IsGrounded()) {
+            pawn.JumpThru();
+        }
+
         currentState = pawn.ChangeState(playerState);
         pawn.ChangeAnimation(currentState);
         
         pawn.SideMovement(moveX);
+
+
+
+
+        // Pause Game
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Pause.isPaused = !Pause.isPaused;
+        }
 	}
 
     void SetState() {
@@ -51,6 +63,12 @@ public class PlayerController : Controller {
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "CheckPoints") {
             GameManager.instance.checkPoint = collision.gameObject;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "JumpThru") {
+            collision.isTrigger = false;
         }
     }
 }

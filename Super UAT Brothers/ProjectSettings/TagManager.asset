@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - CheckPoints
+  - Coin
+  - Key
+  - Enemy
+  - JumpThru
+  - Ground
+  - EnemyWalls
   layers:
   - Default
   - TransparentFX

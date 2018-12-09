@@ -36,13 +36,22 @@ public class Pawn : MonoBehaviour {
         rb.AddForce(Vector2.up * jumpForce * 100);          // Add upward force to ourselves
     }
 
+    public virtual void JumpThru() {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 1.3f); // See if anything is above us
+
+        if (hit.collider != null && hit.collider.tag == "JumpThru") {
+            hit.collider.isTrigger = true;
+        }
+    }
+
     public virtual bool IsGrounded() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.3f); // See if anything is below us
 
         if (hit.collider != null) {             // if we hit anything
-            string name = hit.collider.name;    // create a variable for what we hit to make it easy to use
-            if (name == "Floor") {              // if we hit the floor
-                return true;                    // return true
+            string tag = hit.collider.tag;      // create a variable for what we hit to make it easy to use
+
+            if (tag == "Ground" || tag == "JumpThru") {     // if we hit the floor
+                return true;                                // return true
             }
         }
                         // Otherwise
