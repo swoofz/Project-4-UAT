@@ -39,8 +39,8 @@ public class Pawn : MonoBehaviour {
     public virtual void JumpThru() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 1.3f); // See if anything is above us
 
-        if (hit.collider != null && hit.collider.tag == "JumpThru") {
-            hit.collider.isTrigger = true;
+        if (hit.collider != null && hit.collider.tag == "JumpThru") {   // if we collide with another collider and that collider is a jumpthru object
+            hit.collider.isTrigger = true;                              // set that collider to a trigger
         }
     }
 
@@ -59,11 +59,11 @@ public class Pawn : MonoBehaviour {
     }
 
     public virtual string ChangeState(Controller.States state) {
-        return state.ToString();
+        return state.ToString();    // return our state as a string
     }
 
     public virtual void ChangeAnimation(string state) {
-        Animator anim = GetComponent<Animator>();
-        anim.Play(state);
+        Animator anim = GetComponent<Animator>();   // get our animator
+        anim.Play(state);                           // play animation
     }
 }
